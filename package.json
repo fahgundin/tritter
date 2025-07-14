@@ -1,0 +1,27 @@
+{
+  "name": "tritter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "test": "console.log(\"hello world\")"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fahgundin/tritter.git"
+  },
+  "keywords": [
+    "rede",
+    "social"
+  ],
+  "author": "fahgundin e cuasare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fahgundin/tritter/issues"
+  },
+  "homepage": "https://github.com/fahgundin/tritter#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
