@@ -2,15 +2,25 @@
 
 import express from 'express'
 import publicRoutes from './routes/public.js';
+import path from 'path';
 
 
 const app = express();
-app.use(express.json())
+
 
 // Rotas Publicas
-app.use('/',publicRoutes)
+// app.use('/',publicRoutes)
+
+app.get('/',(req,res) =>{
+   res.render(path.join(process.cwd(),'react', 'index.html'))
+});
+
+console.log(path.join(process.cwd(),'react', 'index.html'))
+
+
+
 
 
 app.listen(1000, () => console.log("Servidor Rodando"));
 
-//postgresql://postgres:[e436YYuaZ5Im]@db.nyksufcqiighnjcvkoee.supabase.co:5432/postgres
+//

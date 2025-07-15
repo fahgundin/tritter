@@ -1,4 +1,5 @@
 import express from 'express';
+import React from 'react';
 
 const router = express.Router();
 
@@ -7,9 +8,12 @@ const router = express.Router();
 router.post('/signup',(req,res)=>{
     const user = req.body;
 
-    res.status(201).json(user);
+    
 
+});
 
+router.get('/',(res,req) =>{
+   res.send("aa")
 });
 
 export default router;
