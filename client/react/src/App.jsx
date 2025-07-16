@@ -2,6 +2,7 @@ import "./index.css";
 import Navbar from "./components/Navbar.jsx";
 import{useEffect} from "react";
 import axios from "axios"
+import Cadastro from "./components/Cadastro.jsx";
 
 function App() {
 
@@ -14,10 +15,13 @@ function App() {
   }, [])
 
   return (
-    
     <div className="h-screen w-screen flex bg-slate-500">
-      
-      <Navbar />
+      <div>
+        <Navbar />
+      </div>
+      <div className="h-screen w-screen">
+        <Cadastro />
+      </div>
     </div>
   );
 }

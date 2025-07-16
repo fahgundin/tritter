@@ -1,6 +1,6 @@
 function Navbar() {
   return (
-    <header className="h-screen border-r-2 border-slate-400 pt-6">
+    <header className="h-screen border-r-1 border-slate-400 pt-6">
       <div className="py-3 px-4 pl-5" alt="Pagina inicial">
         <button className="text-left pl-4 w-32 h-10 hover:bg-slate-400 active:bg-slate-300 focus:outline-none focus:ring focus:ring-slate-200 rounded-full">
           Página inicial
