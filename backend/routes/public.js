@@ -1,19 +1,35 @@
-import express from 'express';
-import React from 'react';
+import express, { json } from 'express';
+import bcrypt from 'bcrypt';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
 
 const router = express.Router();
 
 // Cadastro
 
-router.post('/signup',(req,res)=>{
-    const user = req.body;
+router.post('/signup', async(req,res)=>{
+        const user = req.body;
+        const salt  = await bcrypt.genSalt(10)
+        const hashPassword = await bcrypt.hash(user.password,salt);
+        const userDB = await prisma.users.create({
+            data:{
+                username: user.username,
+                email: user.email,
+                password: hashPassword
+            }
+        } )
 
-    
+    try{
 
+        
+        res.status(201).json(userDB)
+    }catch(err) {
+        res.status(500).json({message:'erro'})
+    }
 });
 
-router.get('/',(res,req) =>{
-   res.send("aa")
-});
+
 
 export default router;
