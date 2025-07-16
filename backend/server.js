@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 
 app.get('/',(req,res) =>{
 
-    res.json({fruits: ["bananas", "macas"]})
+    
 
 });
 
