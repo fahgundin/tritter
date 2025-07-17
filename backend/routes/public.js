@@ -6,8 +6,6 @@ import jwt from 'jsonwebtoken';
 
 // Instancia o Prisma Client
 const prisma = new PrismaClient();
-
-
 const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET
@@ -15,7 +13,6 @@ const JWT_SECRET = process.env.JWT_SECRET
 // Rota Cadastro
 
 router.post('/signup', async(req,res)=>{
-        
 
     try{
         // capta o request
@@ -34,14 +31,14 @@ router.post('/signup', async(req,res)=>{
                 password: hashPassword
             }
         } )
+        return res.status(201).json({message:"cadastro concluido"})
         // THROW erros
     }catch(err) {
         res.status(500).json({message:'erro'})
+        console.log(err)
     }
 });
-
 // Rota login
-
 
 router.post('/login', async(req,res) =>{
     
@@ -71,7 +68,7 @@ router.post('/login', async(req,res) =>{
         }
 
         //gerar token JWT
-        const token = jwt.sign({id: user.id, username: user.username }, JWT_SECRET)
+        const token = jwt.sign({userid: user.userid, username: user.username }, JWT_SECRET)
 
         res.status(200).json(token)
 
@@ -79,7 +76,6 @@ router.post('/login', async(req,res) =>{
         res.status(500).json({message:'erro'})
     }
 })
-
 
 
 export default router;
