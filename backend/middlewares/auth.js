@@ -11,15 +11,15 @@ const auth = (req, res, next) =>{
     try{
         const decoded = jwt.verify(token.replace('Bearer ',''),JWT_SECRET)
 
-        console.log(decoded)
 
-        next
+
+        next()
 
     }catch(err){
         return res.status(401).json({message:"nao autorizado"})
     }
     
-
+    
 }
 
 export default auth

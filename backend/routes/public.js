@@ -31,10 +31,11 @@ router.post('/signup', async(req,res)=>{
                 password: hashPassword
             }
         } )
-        res.status.json({message:"cadastro concluido"})
+        return res.status(201).json({message:"cadastro concluido"})
         // THROW erros
     }catch(err) {
         res.status(500).json({message:'erro'})
+        console.log(err)
     }
 });
 // Rota login
