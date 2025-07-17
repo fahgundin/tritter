@@ -2,6 +2,8 @@
 
 import express from 'express'
 import publicRoutes from './routes/public.js';
+import privateRoutes from './routes/private.js';
+import auth from './middlewares/auth.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
@@ -16,6 +18,7 @@ const corsOptions = {
 app.use(express.json())
 
 app.use('/',publicRoutes)
+app.use('/', auth, privateRoutes)
 
 
 app.use(cors(corsOptions));
