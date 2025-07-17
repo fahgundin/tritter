@@ -15,7 +15,6 @@ const JWT_SECRET = process.env.JWT_SECRET
 // Rota Cadastro
 
 router.post('/signup', async(req,res)=>{
-        
 
     try{
         // capta o request
@@ -40,8 +39,8 @@ router.post('/signup', async(req,res)=>{
     }
 });
 
-// Rota login
 
+// Rota login
 
 router.post('/login', async(req,res) =>{
     
@@ -79,6 +78,23 @@ router.post('/login', async(req,res) =>{
         res.status(500).json({message:'erro'})
     }
 })
+
+// ROTA PARA PEGAR INFORMAÇÕES DE UM USUARIO COM USERNAME 
+
+router.get('/user/:username',async(req,res) =>{
+    const user = await prisma.users.findUnique({
+        omit: {password: true},
+        where: {username: req.params.username}
+    })
+    if(!user){
+        return res.status(404).json({message:'usuario nao encontrado'})
+    }
+    return res.status(200).json(user)
+
+});
+
+
+
 
 
 
