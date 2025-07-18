@@ -1,6 +1,9 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
+import upload from '../middlewares/multer.js';
+import cloudinary from '../utils/cloudinary.js';   
+
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -18,20 +21,22 @@ router.get('/user/:username',async(req,res) =>{
     }
     res.status(200).json(user)
 });
-router.post('/api/updateimage/:user', async(req,res) => {
+router.post('/api/updateimage/:user',upload.single('image'), async(req,res) => {
     try {
         const token = req.headers.authorization
         const decoded = jwt.verify(token.replace('Bearer ',''),JWT_SECRET)
         if((decoded.username !== req.params.user)){
             return res.status(401).json({message:"não é seu"})
         }
+        
+        cloudinary.uploader.upload(req.file.path)
 
         res.status(200).json({message:"foi"})
     }catch(err){
-        
+        console.log(err)
+    
         return res.status(401).json({message:"acesso negado"})
         
-    
     }
     
     
