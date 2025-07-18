@@ -26,7 +26,7 @@ function Navbar() {
       </div>
 
       <div className="py-3 px-4 pl-5" alt="Perfil">
-        <button className="text-left pl-4 w-32 h-10 hover:bg-slate-400 active:bg-slate-300 focus:outline-none focus:ring focus:ring-slate-200 rounded-full">
+        <button className="text-left pl-4 w-32 h-10 hover:bg-slate-400 active:bg-slate-300 focus:outline-none focus:ring focus:ring-slate-200 rounded-full" href="./login">
           Perfil
         </button>
       </div>
