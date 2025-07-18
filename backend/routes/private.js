@@ -1,8 +1,9 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client';
-import jwt from 'jsonwebtoken';
+import jwt, { decode } from 'jsonwebtoken';
 import upload from '../middlewares/multer.js';
 import cloudinary from '../utils/cloudinary.js';   
+import { name } from 'ejs';
 
 
 const prisma = new PrismaClient();
@@ -29,7 +30,31 @@ router.post('/api/updateimage/:user',upload.single('image'), async(req,res) => {
             return res.status(401).json({message:"não é seu"})
         }
         
-        cloudinary.uploader.upload(req.file.path)
+        const name_file = decoded.username + "_icon"
+        
+
+
+        cloudinary.uploader.upload(req.file.path,{
+            public_id:name_file,
+            overwrite:true
+        },async function(err, result){
+            if(err){
+                return res.status(200)
+            }else{
+                const userDB = await prisma.users.update({
+                    where:{
+                        userid:decoded.userid 
+                    },
+                    data:{
+                        user_icon:cloudinary.url(result.secure_url)
+                    }
+                })
+            }
+        })
+        
+        
+       
+
 
         res.status(200).json({message:"foi"})
     }catch(err){

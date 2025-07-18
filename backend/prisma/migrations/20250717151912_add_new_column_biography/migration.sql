@@ -1,8 +1,2 @@
-/*
-  Warnings:
 
-  - You are about to drop the column `biography` on the `users` table. All the data in the column will be lost.
-
-*/
--- AlterTable
-ALTER TABLE "users" DROP COLUMN "biography";
+ALTER TABLE users ADD COLUMN user_icon VARCHAR(255)
