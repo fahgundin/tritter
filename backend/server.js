@@ -21,7 +21,7 @@ app.use(cors(corsOptions));
 app.use(express.json())
 
 app.use('/',publicRoutes)
-app.use('/api/', auth, privateRoutes)
+app.use('/', auth, privateRoutes)
 
 
 
