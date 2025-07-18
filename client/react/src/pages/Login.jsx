@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 export default function Login() {
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {register, handleSubmit, setError, formState: {errors}} = useForm({
         defaultValues: {
             username: "",
             password: "",
@@ -13,6 +14,40 @@ export default function Login() {
       const paraSignUp = () => {
         navigate('/signup');
       }
+
+      const onSubmit = async (data) => {
+       try {
+         const response = await axios.post('http://localhost:1000/login', {
+           username: data.username,
+           password: data.password,
+         });
+
+         if (response.status === 200) {
+           const token = response.data;
+           localStorage.setItem('token', token);
+           navigate('/');
+         } else {
+           setError("username", {
+             type: "manual",
+             message: "Credenciais inválidas"
+           });
+           setError("password", {
+             type: "manual",
+             message: "Credenciais inválidas"
+           });
+
+         }
+       } catch {
+         setError("username", {
+           type: "manual",
+           message: "Erro ao tentar logar. Tente novamente mais tarde."
+         });
+           setError("password", {
+               type: "manual",
+               message: "Erro ao tentar logar. Tente novamente mais tarde."
+           });
+       }
+     };
     
     return (
       <div className="h-screen w-screen bg-slate-500">
@@ -20,9 +55,7 @@ export default function Login() {
           <div className="bg-gray-600 w-80 h-[384px] py-6 rounded flex flex-col items-center justify-center shadow-lg">
             <form
               className="flex flex-col space-y-4 w-full px-6"
-              onSubmit={handleSubmit((data) => {
-                console.log(data);
-              })}
+              onSubmit={handleSubmit(onSubmit)}
             >
               <input
                 type="text"

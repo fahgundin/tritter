@@ -33,6 +33,7 @@ export default function Cadastro() {
 
       const resultado = await response.json();
       console.log("Resposta da API:", resultado);
+      navigate('/login')
       return resultado;
     } catch (error) {
       console.error("Ocorreu um erro:", error);
