@@ -1,5 +1,4 @@
 import "./index.css";
-import Navbar from "./components/Navbar.jsx";
 import {useEffect} from "react";
 import axios from "axios"
 import Cadastro from "./pages/Cadastro.jsx";
