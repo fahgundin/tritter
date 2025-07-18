@@ -1,7 +1,11 @@
 import "./index.css";
 import {useEffect} from "react";
 import axios from "axios"
-import Cadastro from "./components/Cadastro.jsx";
+import Cadastro from "./pages/Cadastro.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Homepage from "./pages/Homepage.jsx";
+import Login from "./pages/Login.jsx";
+
 
 function App() {
 
@@ -14,15 +18,12 @@ function App() {
   }, [])
 
   return (
-    <div className="h-screen w-screen flex bg-slate-500">
-      <div>
-        <Navbar />
-      </div>
-      <div className="h-screen w-screen">
-        <Cadastro />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/signup" element={<Cadastro />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
