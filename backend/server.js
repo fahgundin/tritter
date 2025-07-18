@@ -15,13 +15,15 @@ const app = express();
 const corsOptions = {
     origin: ["http://127.0.0.1:5173","http://localhost:5173"]
 }
+
+app.use(cors(corsOptions));
+
 app.use(express.json())
 
 app.use('/',publicRoutes)
 app.use('/', auth, privateRoutes)
 
 
-app.use(cors(corsOptions));
 
 // Rotas Publicas
 

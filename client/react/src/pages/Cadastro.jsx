@@ -17,11 +17,13 @@ export default function Cadastro() {
 
   async function enviarDados(data) {
     try {
-      const response = await fetch("https://localhost:1000/singup", {
+      
+      const response = await fetch("http://localhost:1000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        },
+        }
+        ,
         body: JSON.stringify(data),
       });
 
