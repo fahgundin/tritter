@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
+import fundoCadastro from "../assets/layered-peaks-haikei.png";
 
 export default function Cadastro() {
   const {
@@ -48,9 +48,16 @@ export default function Cadastro() {
   };
 
   return (
-    <div className="h-screen w-screen bg-slate-500">
+    <div
+      cclassName="h-screen w-screen"
+      style={{
+        backgroundImage: `url(${fundoCadastro})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="h-screen flex items-center justify-center">
-        <div className="bg-gray-600 w-80 h-[420px] py-6 px-4 rounded flex flex-col items-center justify-center shadow-lg">
+        <div className="bg-gray-600/70 backdrop-blur-md w-80 h-[420px] py-6 px-4 rounded flex flex-col items-center justify-center shadow-lg">
           <form
             onSubmit={handleSubmit((data) => {
               enviarDados(data);

@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
+import fundoLogin from "../assets/layered-peaks-haikei.png";
+
 
 export default function Login() {
     const {register, handleSubmit, setError, formState: {errors}} = useForm({
@@ -50,9 +52,16 @@ export default function Login() {
      };
     
     return (
-      <div className="h-screen w-screen bg-slate-500">
+      <div
+        className="h-screen w-screen"
+        style={{
+          backgroundImage: `url(${fundoLogin})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="h-screen flex items-center justify-center">
-          <div className="bg-gray-600 w-80 h-[384px] py-6 rounded flex flex-col items-center justify-center shadow-lg">
+          <div className="bg-gray-600/70 backdrop-blur-md w-80 h-[386px] py-6 rounded flex flex-col items-center justify-center shadow-lg">
             <form
               className="flex flex-col space-y-4 w-full px-6"
               onSubmit={handleSubmit(onSubmit)}
