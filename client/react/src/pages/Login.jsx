@@ -61,7 +61,7 @@ export default function Login() {
         }}
       >
         <div className="h-screen flex items-center justify-center">
-          <div className="bg-gray-600/70 backdrop-blur-md w-80 h-[386px] py-6 rounded flex flex-col items-center justify-center shadow-lg">
+          <div className="bg-gray-600/80 backdrop-blur-md w-80 h-[386px] py-6 rounded flex flex-col items-center justify-center shadow-lg">
             <form
               className="flex flex-col space-y-4 w-full px-6"
               onSubmit={handleSubmit(onSubmit)}

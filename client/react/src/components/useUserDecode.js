@@ -1,14 +1,14 @@
 function useUserDecode() {
   const token = localStorage.getItem("token");
-  let user = "";
+  let userToken = "";
 
   if (token) {
     const payload = token.split(".")[1];
     const decoded = JSON.parse(atob(payload));
-    user = decoded.username;
+    userToken = decoded.username;
   }
 
-  return user;
+  return userToken;
 }
 
 export default useUserDecode;

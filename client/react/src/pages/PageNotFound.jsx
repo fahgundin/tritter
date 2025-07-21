@@ -12,7 +12,8 @@ function PageNotFound() {
         onClick={paraHome}
         className="text-white cursor-pointer flex items-center text-2xl gap-2"
       >
-        Erro 404. Página não encontrada. <CircleX />
+        <CircleX />
+        Erro 404. Página não encontrada ou inexistente.
       </h1>
     </div>
   );

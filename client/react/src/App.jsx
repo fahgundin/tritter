@@ -8,7 +8,7 @@ import Cadastro from "./pages/Cadastro.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import Login from "./pages/Login.jsx";
 import RotaPrivada from "./components/RotaPrivada.jsx";
-import Profile from "./components/Profile.jsx"
+import Profile from "./pages/Profile.jsx"
 import PageNotFound from "./pages/PageNotFound.jsx";
 
 

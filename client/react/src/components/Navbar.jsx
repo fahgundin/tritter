@@ -4,32 +4,32 @@ import useUserDecode from "./useUserDecode";
 
 
 function Navbar() {
-  const user = useUserDecode();
+  const userToken = useUserDecode();
 
   // Função para levar o usuario para o perfil dele ao clicar em perfil e verificar se ele ja nao está na rota do proprio perfil
   const navigate = useNavigate();
   const location = useLocation()
   const pathName = location.pathname
   const paraPerfil = () => {
-    if (!user) {
+    if (!userToken) {
       navigate('/login');
-    } else if (pathName === `/user/${user}`) {
+    } else if (pathName === `/user/${userToken}`) {
       navigate(0);
     } else {
-      navigate(`/user/${user}`);
+      navigate(`/user/${userToken}`);
     }
   }
 
   // Função para ir para rota Homepage
   const paraHomepage = () => {
-    if (!user) {
+    if (!userToken) {
       navigate('/login')
     } else {
       navigate('/')
     }
   }
 
-  // Função para deslogar (remover itens do localStorage)
+  // Função para deslogar (remover token do localStorage)
   function deslogar(){
     localStorage.clear()
     navigate('/login')
