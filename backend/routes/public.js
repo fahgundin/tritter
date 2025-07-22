@@ -77,6 +77,8 @@ router.post('/login', async(req,res) =>{
     }
 })
 
+// PEGAR INFORMAÇÕES DE USUARIO
+
 router.get('/user/:username',async(req,res) =>{
     const user = await prisma.users.findUnique({
         omit: {password: true},
@@ -87,5 +89,29 @@ router.get('/user/:username',async(req,res) =>{
     }
     res.status(200).json(user)
 });
+
+router.get('/post/:postid',async(req,res)=>{
+    const postid = parseInt(req.params.postid)
+    const post = await prisma.posts.findUnique({
+        where:{postID: postid}
+    })
+    if (!post){
+        return res.status(401)
+    }
+    const user = await prisma.users.findUnique({
+        where:{userid: post.userid}, 
+        omit:{password: true, email:true, biography: true}
+    })
+    const json_object = {
+        post: post,
+        user: user
+    }
+
+
+    res.status(200).json(json_object)
+    
+
+})
+
 
 export default router;
