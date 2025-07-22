@@ -56,6 +56,35 @@ router.post('/api/updateimage/:user',upload.single('image'), async(req,res) => {
     
 })
 
+//POSTAR
+
+router.post('/api/post', async(req,res) =>{
+    try {
+        const post_info = req.body
+        const token = req.headers.authorization
+        const decoded = jwt.verify(token.replace('Bearer ', ''), JWT_SECRET)
+
+
+        const postDB = await prisma.posts.create({
+            data:{
+                content: post_info.content,
+                userid: decoded.userid,
+            }
+        }
+        )
+        res.status(200).json({message:"deu tudo certo"})
+
+
+    }catch(err){
+        console.log(err)
+    }
+
+
+
+
+})
+
+
 
 
 export default router
