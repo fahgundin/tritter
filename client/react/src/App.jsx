@@ -10,6 +10,7 @@ import Login from "./pages/Login.jsx";
 import RotaPrivada from "./components/RotaPrivada.jsx";
 import Profile from "./pages/Profile.jsx"
 import PageNotFound from "./pages/PageNotFound.jsx";
+import Post from "./pages/Post.jsx";
 
 
 function App() {
@@ -34,11 +35,13 @@ function App() {
             </RotaPrivada>
           }
         />
+        <Route path="/post/:id" element={<Post />} />
         <Route path="/signup" element={<Cadastro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<Navigate to="/" replace />} />
         <Route path="/user/:username" element={<Profile />} />
-        <Route path="*" element={<PageNotFound />} />
+        {/* <Route path="/post" element={<Navigate to="/" replace/>} />
+        <Route path="*" element={<PageNotFound />} /> */}
       </Routes>
     </BrowserRouter>
   );

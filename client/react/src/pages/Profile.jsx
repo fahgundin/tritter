@@ -1,6 +1,6 @@
 import { ArrowLeftCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 
@@ -9,6 +9,7 @@ function Profile(){
   function voltar () {
     navigate(-1)
   }
+  const { username } = useParams()
     
   const cld = new Cloudinary({
     cloud: {
@@ -16,7 +17,7 @@ function Profile(){
     },
   }); 
 
-  const myImage = cld.image("arthurteste_icon");
+  const myImage = cld.image(`${username}_icon`);
 
 
     return (
@@ -30,7 +31,7 @@ function Profile(){
             <button
               onClick={voltar}
               className="text-white flex items-center text-[18px] hover:underline focus:outline-none"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <ArrowLeftCircle
                 style={{ marginLeft: "4px", marginRight: "4px" }}
@@ -39,10 +40,22 @@ function Profile(){
               Voltar
             </button>
           </div>
-          <div className="flex-1" alt="Div do conteudo do perfil">
-            <div className="rounded-full h-[150px] w-[150px] border-black" alt="Foto de perfil do usuário">
-              <AdvancedImage className="rounded-full object-cover border border-black" cldImg={myImage} />
+          <div
+            className="flex-1 flex flex-col items-center pt-8"
+            alt="Div do conteudo do perfil"
+          >
+            <div
+              className="relative h-[200px] w-[200px] pt-1"
+              alt="Foto de perfil do usuário"
+            >
+              <AdvancedImage
+                className="rounded-full object-cover border-2 border-black h-[200px] w-[200px]"
+                cldImg={myImage}
+              />
             </div>
+            <h1 className="text-white text-2xl text-center mt-4">
+              {username}
+            </h1>
           </div>
         </div>
       </div>
