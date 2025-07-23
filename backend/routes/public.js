@@ -87,7 +87,18 @@ router.get('/user/:username',async(req,res) =>{
     if(!user){
         return res.status(404).json({message:'usuario nao encontrado'})
     }
-    res.status(200).json(user)
+    const posts = await prisma.posts.findMany({
+        where:{userid: user.userid}
+
+    })
+    const json_object = {
+        user: user,
+        post: posts
+    }
+
+
+
+    res.status(200).json(json_object)
 });
 
 router.get('/post/:postid',async(req,res)=>{
@@ -109,7 +120,6 @@ router.get('/post/:postid',async(req,res)=>{
 
 
     res.status(200).json(json_object)
-    
 
 })
 
