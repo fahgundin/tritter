@@ -61,29 +61,25 @@ function Post() {
     );
   }
 
-  console.log(data);
-
   const isoDateString = data.post.created_at;
   const timeStamp = Date.parse(isoDateString);
   const date = new Date(timeStamp)
   const dataFormatada = date.toLocaleDateString('pt-BR')
-
   const dadosPost =  data.post.content
   const profilePicLink = data.user.user_icon;
   const userName = data.user.username;
-  
   
 
   return (
     <div className="h-screen w-screen bg-slate-500 flex">
       <Navbar />
       <div className="flex-1 flex items-center justify-center">
-        <div className="flex flex-col items-start h-[fit] w-[fit] border-2 border-slate-400 rounded-3xl p-4">
+        <div className="flex flex-col items-start h-[fit] w-[700px] border-2 border-slate-400 rounded-3xl p-4">
           <div className="flex items-center mb-4">
             <img
               src={profilePicLink}
               alt="Profile picture"
-              className="h-12 w-12 rounded-full object-cover"
+              className="h-12 w-12 rounded-full object-cover border-2"
             />
             <h1 className="text-white pl-[10px] h-fit w-fit">
               {userName}
