@@ -11,8 +11,9 @@ const prisma = new PrismaClient();
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET
 
-// ROTA PARA PEGAR INFORMAÇÕES DE UM USUARIO COM USERNAME 
 
+
+// ATUALIZAR IMAGEM DE PERFIL
 
 router.post('/api/updateimage/',upload.single('image'), async(req,res) => {
     try {
@@ -77,10 +78,85 @@ router.post('/api/post', async(req,res) =>{
         console.log(err)
     }
 
+})
+
+// RESPONDER POST
+
+router.post('/api/quote/post/:postid', async(req,res) =>{
+    try {
+        const post_info = req.body
+        const token = req.headers.authorization
+        const decoded = jwt.verify(token.replace('Bearer ', ''), JWT_SECRET)
+
+        const post = await prisma.posts.findUnique({
+            where:{
+                postID:parseInt(req.params.postid)
+            }
+        })
+        if (!post){
+            return res.status(401).json({message:"not found"})
+        }
+
+        const postDB = await prisma.posts.create({
+            data:{
+                content: post_info.content,
+                userid: decoded.userid,
+                quote: parseInt(req.params.postid)
+            }
+        }
+        )
+        res.status(200).json({message:"deu tudo certo"})
 
 
+    }catch(err){
+        console.log(err)
+    }
 
 })
+
+// PEGAR QUOTES DE UM POST
+
+router.get('/api/quote/get/:postid', async(req,res) =>{
+    const posts = await prisma.posts.findMany({
+        where:{
+            quote:parseInt(req.params.postid)
+        }
+    })
+    res.status(200).json(posts)
+
+})
+
+// EXCLUIR POST
+
+router.delete('/api/delete/post/:postid', async(req,res)=>{
+    try{
+        const token = req.headers.authorization
+        const decoded = jwt.verify(token.replace('Bearer ',''), JWT_SECRET)
+
+        const post = await prisma.posts.findUnique({
+            where:{
+                postID: parseInt(req.params.postid)
+            }
+        })
+        if(!post){
+            return res.status(401).json({message:"not found"})
+        }
+        if(decoded.userid === post.userid){
+            await prisma.posts.delete({
+                where:{
+                    postID: parseInt(req.params.postid)
+                }
+            })
+        }else{
+            return res.status(400).json({message:"denied"})
+        }
+        res.status(200).json({message:"tudo certo"})
+        
+    }catch(err){
+        console.log(err)
+    }
+})
+
 
 //SEGUIR
 
