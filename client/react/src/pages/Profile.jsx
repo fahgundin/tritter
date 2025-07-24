@@ -1,4 +1,4 @@
-import { ArrowLeftCircle } from "lucide-react";
+import { ArrowLeftCircle, User } from "lucide-react";
 import Navbar from "../components/Navbar";
 import { useNavigate, useParams } from "react-router-dom";
 import { AdvancedImage } from "@cloudinary/react";
@@ -66,7 +66,26 @@ function Profile() {
 
   if (error) {
     return (
-      <div className="text-red-500 p-4">Erro ao carregar: {error.message}</div>
+      <div className="h-screen w-screen flex bg-slate-500">
+        <Navbar />
+        <div className="flex flex-col justify-between min-h-screen flex-1">
+          <div className="border-b border-slate-400 h-[40px] w-full flex items-center px-4">
+            <button
+              onClick={voltar}
+              className="text-white flex items-center text-[18px] hover:underline focus:outline-none"
+            >
+              <ArrowLeftCircle
+                style={{ marginLeft: "4px", marginRight: "4px" }}
+                size={20}
+              />
+              Voltar
+            </button>
+          </div>
+          <div className="flex-1 flex flex-col items-center pt-8">
+            <h1 className="text-white text-2xl text-center mt-4">Erro no servidor ou usuario {username} não existe!</h1>
+          </div>
+        </div>
+      </div>
     );
   }
 
@@ -78,16 +97,15 @@ function Profile() {
     const date = new Date(timeStamp);
     dataFormatada = date.toLocaleDateString("pt-BR");
   }
+  const profilePicLink = data.user.user_icon;
   const user = data.user;
   const posts = data.post;
-  const profilePicLink = data.user.user_icon;
   const myImage = cld.image(`${username}_icon`);
-
 
   return (
     <div className="h-screen w-screen flex bg-slate-500 scroll-smooth">
       <Navbar />
-      <div className="flex flex-col justify-between min-h-screen flex-1">
+      <div className="flex flex-col justify-between min-h-screen flex-1 transparent-scrollbar">
         <div className="border-b border-slate-400 h-[40px] w-full flex items-center px-4">
           <button
             onClick={voltar}
@@ -104,19 +122,22 @@ function Profile() {
         <div className="flex-1 flex flex-col items-center pt-8 overflow-y-auto">
           <div className="relative h-[200px] w-[200px] pt-1">
             <AdvancedImage
-              className="rounded-full object-cover border-2 border-black h-[200px] w-[200px]"
+              className="rounded-full object-cover border-3 border-black h-[200px] w-[200px]"
               cldImg={myImage}
             />
           </div>
           <h1 className="text-white text-2xl text-center mt-4 pb-2">
             {user.username}
           </h1>
-          {posts.map((post) => (
+          {posts
+          .slice()
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .map((post) => (
             
             <div key={post.postID} className="flex-1 flex items-center justify-center pb-2 cursor-pointer" onClick={() => {
               navigate(`/post/${post.postID}`);
             }}>
-              <div className="flex flex-col items-start h-[fit] w-[700px] border-2 border-slate-400 rounded-3xl p-4">
+              <div className="flex flex-col items-start h-[fit] w-[700px] border-2 border-slate-400 rounded-3xl p-4 hover:bg-slate-400/20">
                 <div className="flex items-center mb-4">
                   <img
                     src={profilePicLink}

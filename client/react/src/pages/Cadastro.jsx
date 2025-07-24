@@ -14,7 +14,6 @@ export default function Cadastro() {
       password: "",
     },
   });
-
   async function enviarDados(data) {
     try {
       
@@ -22,6 +21,7 @@ export default function Cadastro() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          
         }
         ,
         body: JSON.stringify(data),

@@ -1,6 +1,7 @@
-import { Bell, Home, Mountain, PenLine, User, UserMinus } from "lucide-react"
+import { Bell, Home, Mountain, User, UserMinus } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 import useUserDecode from "./useUserDecode";
+import Postar from "./Postar";
 
 
 function Navbar() {
@@ -57,11 +58,7 @@ function Navbar() {
         </button>
       </div>
 
-      <div className="py-3 px-4 pl-5" alt="Postar">
-        <button className="text-white text-left pl-4 w-[160px] h-10 hover:bg-slate-400 active:bg-slate-300 focus:outline-none focus:ring focus:ring-slate-200 rounded-full flex items-center">
-          <PenLine style={{ marginRight: '8px' }} /> Postar
-        </button>
-      </div>
+      <Postar />
 
       <div className="py-3 px-4 pl-5" alt="Perfil">
         <button onClick={paraPerfil} className="text-white text-left pl-4 w-[160px] h-10 hover:bg-slate-400 active:bg-slate-300 focus:outline-none focus:ring focus:ring-slate-200 rounded-full flex items-center">

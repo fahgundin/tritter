@@ -1,1 +1,17 @@
 @import "tailwindcss";
+.transparent-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.transparent-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* fundo da barra de scroll */
+}
+
+.transparent-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3); /* a "barra" em si */
+  border-radius: 4px;
+}
+
+.transparent-scrollbar {
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent; /* para Firefox */
+}

@@ -40,8 +40,10 @@ function Post() {
       <div className="h-screen w-screen flex bg-slate-500">
         <Navbar />
         <div className="flex-1 flex items-center justify-center">
-          <div className="flex h-[500px] w-[500px] border-2 border-slate-400 rounded-3xl justify-center ">
-            <h1 className="text-white flex items-center text-2xl">Carregando...</h1>
+          <div className="flex items-center border-slate-400 rounded-3xl justify-center ">
+            <h1 className="text-white flex items-center text-2xl">
+              Carregando...
+            </h1>
           </div>
         </div>
       </div>
@@ -65,6 +67,7 @@ function Post() {
   const timeStamp = Date.parse(isoDateString);
   const date = new Date(timeStamp)
   const dataFormatada = date.toLocaleDateString('pt-BR')
+  const horaFormatada = date.toLocaleTimeString('pt-BR')
   const dadosPost =  data.post.content
   const profilePicLink = data.user.user_icon;
   const userName = data.user.username;
@@ -89,7 +92,7 @@ function Post() {
             <h2 className="mt-2 text-white w-full">{dadosPost}</h2>
           </div>
           <div>
-            <h3 className="text-white">{dataFormatada}</h3>
+            <h3 className="text-white">{dataFormatada} às {horaFormatada}</h3>
           </div>
         </div>
       </div>
