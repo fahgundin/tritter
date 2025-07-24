@@ -197,7 +197,7 @@ router.put('/api/follow/:user', async(req,res)=>{
                 }
             })
             const texto_notificacao = decoded.username + ' começou a seguir você!'
-            const notificacaoDB = await prisma.notifications.findUnique({
+            const notificacaoDB = await prisma.notifications.findMany({
                 where:{
                     userid: user.userid,
                     content: texto_notificacao
