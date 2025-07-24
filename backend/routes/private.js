@@ -271,11 +271,47 @@ router.put('/api/follow/:user', async(req,res)=>{
     }
 })
 
-// CHECKAR NOTIFICAÇÕES SEM LER
+// CHECKAR NOTIFICAÇÕES 
 
-// router.get('/api/')
+router.get('/api/withoutread/getnotifications', async(req,res)=>{
+    const token = req.headers.authorization
+    const decoded = jwt.verify(token.replace('Bearer ', ''),JWT_SECRET)
 
-// CHECKAR NOTIFICAÇÕES SEM LER
+    const notifications = await prisma.notifications.findMany({
+        where:{
+            userid: decoded.userid
+        }
+    })
+
+    res.status(200).json(notifications)
+
+
+})
+
+// CHECKAR NOTIFICAÇÕES ( VAI LER )
+
+router.get('/api/getnotifications', async(req,res)=>{
+    const token = req.headers.authorization
+    const decoded = jwt.verify(token.replace('Bearer ', ''),JWT_SECRET)
+
+    const notifications = await prisma.notifications.findMany({
+        where:{
+            userid: decoded.userid
+        }
+    })
+    const notificationsDB = await prisma.notifications.update({
+        where:{
+            userid: decoded.userid
+        },
+        data:{
+            read:true
+        }
+    })
+
+    res.status(200).json(notifications)
+
+
+})
 
 
 
