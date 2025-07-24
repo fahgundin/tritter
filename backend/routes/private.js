@@ -162,6 +162,7 @@ router.delete('/api/delete/post/:postid', async(req,res)=>{
 
 router.put('/api/follow/:user', async(req,res)=>{
     try{
+        const DataAtual = new Date();
         const token = req.headers.authorization
         const decoded = jwt.verify(token.replace('Bearer ',''), JWT_SECRET)
 
@@ -195,6 +196,37 @@ router.put('/api/follow/:user', async(req,res)=>{
                     }
                 }
             })
+            const texto_notificacao = decoded.username + ' começou a seguir você!'
+            const notificacaoDB = await prisma.notifications.findUnique({
+                where:{
+                    userid: user.userid,
+                    content: texto_notificacao
+                }
+            })
+            if(!notificacaoDB){
+                const notification = await prisma.notifications.create({
+                    data:{
+                        content: texto_notificacao,
+                        userid: user.userid
+                    }
+                })
+            }else{
+                const diffDeNotificacao = DataAtual.getTime() - notificacaoDB.created_at
+                const diaEmMilissegundo = 24 * 60 * 60 * 1000
+                if(diffDeNotificacao > diaEmMilissegundo){
+                    notificacaoDB = await prisma.notifications.update({
+                        where:{
+                            userid: user.userid,
+                            content: texto_notificacao
+                    }, 
+                        data:{
+                            read: false,
+                            created_at: DataAtual.getTime()
+                    }
+                    })
+                }
+            }
+            
         }else{
             const { followers } = await prisma.users.findUnique({
                 where: {
@@ -233,15 +265,17 @@ router.put('/api/follow/:user', async(req,res)=>{
                 }
             })
         }
-        
-        
-
-        res.status(200).json(user)
+        res.status(200).json({message:"tudo certo "})
     }catch(err){
         console.log(err)
     }
-
 })
+
+// CHECKAR NOTIFICAÇÕES SEM LER
+
+// router.get('/api/')
+
+// CHECKAR NOTIFICAÇÕES SEM LER
 
 
 
