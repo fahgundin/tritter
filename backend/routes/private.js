@@ -313,6 +313,30 @@ router.get('/api/getnotifications', async(req,res)=>{
 
 })
 
+//PEGAR POSTS DE PESSOAS SEGUINDO
+
+router.get('/api/getfollowingposts',async(req,res)=>{
+
+    const token = req.headers.authorization
+    const decoded = jwt.verify(token.replace('Bearer ',''),JWT_SECRET)
+
+    const user = await prisma.users.findUnique({
+        where:{
+            userid:decoded.userid
+        }
+    })
+    const following_people = await prisma.users.findMany({
+        where:{
+            username: user.followers
+        }
+    })
+
+    res.status(200).json(following_people)
+
+
+
+})
+
 
 
 export default router
