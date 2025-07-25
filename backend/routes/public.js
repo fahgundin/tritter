@@ -101,6 +101,8 @@ router.get('/user/:username',async(req,res) =>{
     res.status(200).json(json_object)
 });
 
+// acessar post
+
 router.get('/post/:postid',async(req,res)=>{
     const postid = parseInt(req.params.postid)
     const post = await prisma.posts.findUnique({
@@ -121,6 +123,42 @@ router.get('/post/:postid',async(req,res)=>{
 
     res.status(200).json(json_object)
 
+})
+
+// consulta
+
+router.get('/search/:pesquisa', async(req,res) => {
+    try{
+        const user = await prisma.users.findMany({
+            where:{
+                OR:[{
+                    username:{
+                        search: req.params.pesquisa
+                    },
+                    biography:{
+                        search: req.params.pesquisa
+                    },
+                }]
+            },
+            omit:{
+                password:true
+            }
+        })
+        const posts = await prisma.posts.findMany({
+            where:{
+                content:{
+                    search: req.params.pesquisa
+                }
+            }
+        })
+        const json = {
+            users: user,
+            posts: posts
+        }
+        res.status(200).json(json)
+    }catch(err){
+        console.log(err)
+    }
 })
 
 
