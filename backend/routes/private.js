@@ -327,11 +327,26 @@ router.get('/api/getfollowingposts',async(req,res)=>{
     })
     const following_people = await prisma.users.findMany({
         where:{
-            username: user.followers
+            username:{
+                in:user.follows
+            }
+        },
+        select:{
+            userid:true
+        }
+    })
+    const followingIDS = following_people.map(person => person.userid)
+    
+    const following_posts = await prisma.posts.findMany({
+        where:{
+            
+            userid:{
+                in:followingIDS
+            }
         }
     })
 
-    res.status(200).json(following_people)
+    res.status(200).json(following_posts)
 
 
 
