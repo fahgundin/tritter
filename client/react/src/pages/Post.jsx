@@ -1,13 +1,16 @@
 import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import LoadingProfile from "../components/LoadingProfile";
 
 function Post() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate()
+  const voltar = () => navigate(-1);
 
   useEffect(() => {
     let timeoutId;
@@ -18,7 +21,7 @@ function Post() {
         timeoutId = setTimeout(() => {
           setError(new Error("Tempo limite excedido ao buscar o post."));
           setLoading(false);
-        }, 8000);
+        }, 10000);
 
         const response = await axios.get(`http://localhost:1000/post/${id}`);
         clearTimeout(timeoutId);
@@ -36,18 +39,7 @@ function Post() {
   
 
   if (loading) {
-    return (
-      <div className="h-screen w-screen flex bg-slate-500">
-        <Navbar />
-        <div className="flex-1 flex items-center justify-center">
-          <div className="flex items-center border-slate-400 rounded-3xl justify-center ">
-            <h1 className="text-white flex items-center text-2xl">
-              Carregando...
-            </h1>
-          </div>
-        </div>
-      </div>
-    );
+    return <LoadingProfile voltar={voltar} />
   }
 
   if (error) {

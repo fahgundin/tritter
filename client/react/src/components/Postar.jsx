@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 function Postar(){
     const [exibirDivPostar, setExibirDivPostar] = useState(false)
     const modalRef = useRef(null);
-    const [eixibirPostEnviado, setExibirPostEnviado] = useState(true)
+    const [eixibirPostEnviado, setExibirPostEnviado] = useState(false)
     let toggleDiv = () => {
         setExibirDivPostar(!exibirDivPostar);
     };
@@ -65,6 +65,15 @@ function Postar(){
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [exibirDivPostar]);
+
+    useEffect(() => {
+      if (eixibirPostEnviado) {
+        const timer = setTimeout(() => {
+          setExibirPostEnviado(false);
+        }, 4000);
+        return () => clearTimeout(timer);
+      }
+    }, [eixibirPostEnviado]);
 
     return (
       <div>
@@ -126,9 +135,9 @@ function Postar(){
           </div>
         )}
         {eixibirPostEnviado && (
-          <div>
-            <div className="fixed bottom-0 left-0 justify-center ">
-
+          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+            <div className="bg-white rounded-2xl px-6 py-2 shadow-lg">
+              <h1 className="text-black">Post enviado com sucesso!</h1>
             </div>
           </div>
         )}
