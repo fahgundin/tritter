@@ -343,6 +343,15 @@ router.get('/api/getfollowingposts',async(req,res)=>{
             userid:{
                 in:followingIDS
             }
+        },
+        include:{
+            users:{
+                select:{
+                    username:true,
+                    user_icon:true,
+
+                }
+            }
         }
     })
 
