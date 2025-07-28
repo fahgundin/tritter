@@ -270,7 +270,7 @@ router.get('/api/withoutread/getnotifications', async(req,res)=>{
 
 // CHECKAR NOTIFICAÇÕES ( VAI LER )
 
-router.get('/api/getnotifications', async(req,res)=>{
+router.put('/api/getnotifications', async(req,res)=>{
     const token = req.headers.authorization
     const decoded = jwt.verify(token.replace('Bearer ', ''),JWT_SECRET)
 
