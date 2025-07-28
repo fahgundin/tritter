@@ -11,6 +11,7 @@ import RotaPrivada from "./components/RotaPrivada.jsx";
 import Profile from "./pages/Profile.jsx"
 import PageNotFound from "./pages/PageNotFound.jsx";
 import Post from "./pages/Post.jsx";
+import Notifications from "./pages/Notifications.jsx";
 
 
 function App() {
@@ -35,6 +36,14 @@ function App() {
             </RotaPrivada>
           }
         />
+        <Route
+          path="/notifications"
+          element={
+            <RotaPrivada>
+              <Notifications />
+            </RotaPrivada>
+          }
+          />
         <Route path="/post/:id" element={<Post />} />
         <Route path="/signup" element={<Cadastro />} />
         <Route path="/login" element={<Login />} />

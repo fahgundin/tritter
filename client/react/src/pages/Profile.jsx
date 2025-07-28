@@ -110,13 +110,6 @@ function Profile() {
   //ATRIBUINDO OS DADOS REQUISITADOS PELA API 
   const seguidores = data.user.followers.length
   const seguindo = data.user.follows.length
-  let dataFormatada = "";
-  if (data && data.post && data.post.length > 0) {
-    const isoDateString = data.post[0].created_at;
-    const timeStamp = Date.parse(isoDateString);
-    const date = new Date(timeStamp);
-    dataFormatada = date.toLocaleDateString("pt-BR");
-  }
   let followButton = false
   if (userToken !== param.username){
     followButton = true
@@ -167,67 +160,79 @@ function Profile() {
           {posts
             .slice()
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-            .map((post) => (
-              <div
-                key={post.postID}
-                className="flex-1 flex items-center justify-center pb-2 cursor-pointer"
-              >
+            .map((post) => {
+              const date = new Date(post.created_at);
+              const dataFormatada = isNaN(date)
+                ? "Data inválida"
+                : `${date.toLocaleDateString(
+                    "pt-BR"
+                  )} ${date.toLocaleTimeString("pt-BR", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}`;
+
+              return (
                 <div
-                  onClick={() => navigate(`/post/${post.postID}`)}
-                  className="flex flex-col items-start border-2 border-slate-400 rounded-3xl p-4 hover:bg-slate-400/20 relative w-[700px] h-fit"
+                  key={post.postID}
+                  className="flex-1 flex items-center justify-center pb-2 cursor-pointer"
                 >
-                  <div className="absolute top-4 right-4">
-                    <button
-                      className="p-3 z-50"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setPostMenuAberto(post.postID);
-                      }}
-                    >
-                      <Ellipsis className="text-white hover:bg-gray-400/30 rounded-[10px]" />
-                    </button>
-                    {postMenuAberto === post.postID && (
-                      <div className="absolute top-0 right-0 mt-2 mr-2 py-3 w-50 bg-white rounded-md shadow-xl z-10">
-                        <a
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            deletarPost(post.postID);
-                          }}
-                          className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                        >
-                          Deletar post
-                        </a>
-                        <a
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setPostMenuAberto(null);
-                          }}
-                          className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                        >
-                          Fechar
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex items-center mb-4">
-                    <img
-                      src={profilePicLink}
-                      alt="Profile picture"
-                      className="h-12 w-12 rounded-full object-cover border-2"
-                    />
-                    <h1 className="text-white pl-[10px] h-fit w-fit">
-                      {username}
-                    </h1>
-                  </div>
-                  <div className="w-full mb-4">
-                    <h2 className="mt-2 text-white w-full">{post.content}</h2>
-                  </div>
-                  <div>
-                    <h3 className="text-white">{dataFormatada}</h3>
+                  <div
+                    onClick={() => navigate(`/post/${post.postID}`)}
+                    className="flex flex-col items-start border-2 border-slate-400 rounded-3xl p-4 hover:bg-slate-400/20 relative w-[700px] h-fit"
+                  >
+                    <div className="absolute top-4 right-4">
+                      <button
+                        className="p-3 z-50"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setPostMenuAberto(post.postID);
+                        }}
+                      >
+                        <Ellipsis className="text-white hover:bg-gray-400/30 rounded-[10px]" />
+                      </button>
+                      {postMenuAberto === post.postID && (
+                        <div className="absolute top-0 right-0 mt-2 mr-2 py-3 w-50 bg-white rounded-md shadow-xl z-10">
+                          <a
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              deletarPost(post.postID);
+                            }}
+                            className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                          >
+                            Deletar post
+                          </a>
+                          <a
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setPostMenuAberto(null);
+                            }}
+                            className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                          >
+                            Fechar
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center mb-4">
+                      <img
+                        src={profilePicLink}
+                        alt="Profile picture"
+                        className="h-12 w-12 rounded-full object-cover border-2"
+                      />
+                      <h1 className="text-white pl-[10px] h-fit w-fit">
+                        {username}
+                      </h1>
+                    </div>
+                    <div className="w-full mb-4">
+                      <h2 className="mt-2 text-white w-full">{post.content}</h2>
+                    </div>
+                    <div>
+                      <h3 className="text-white">{dataFormatada}</h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
         </div>
       </div>
     </div>
