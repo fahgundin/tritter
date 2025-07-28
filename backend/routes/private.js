@@ -270,16 +270,12 @@ router.get('/api/withoutread/getnotifications', async(req,res)=>{
 
 // CHECKAR NOTIFICAÇÕES ( VAI LER )
 
-router.put('/api/getnotifications', async(req,res)=>{
+router.get('/api/getnotifications', async(req,res)=>{
+    try{
     const token = req.headers.authorization
     const decoded = jwt.verify(token.replace('Bearer ', ''),JWT_SECRET)
-
-    const notifications = await prisma.notifications.findMany({
-        where:{
-            userid: decoded.userid
-        }
-    })
-    const notificationsDB = await prisma.notifications.update({
+    
+    const notificationsDB = await prisma.notifications.updateMany({
         where:{
             userid: decoded.userid
         },
@@ -288,7 +284,10 @@ router.put('/api/getnotifications', async(req,res)=>{
         }
     })
 
-    res.status(200).json(notifications)
+    res.status(200).json(notificationsDB)
+    }catch(err){
+        console.log(err)
+    }
 
 
 })
