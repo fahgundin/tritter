@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
          host: '0.0.0.0', 
-         allowedHosts:['tritter.onrender.com','0.0.0.0'],
+         allowedHosts:['tritter-27ip.onrender.com','0.0.0.0'],
 
          port: 3000,
        },
