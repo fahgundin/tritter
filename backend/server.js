@@ -7,7 +7,7 @@ import auth from './middlewares/auth.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
-const port = process.env.PORT || 1000;
+const port = process.env.PORT || 8000;
 
 
 
