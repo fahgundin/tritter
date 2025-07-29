@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "dev:server": "node ./backend/server.js",
+    
     "dev:vite": "cd client/react && npm install && npm run dev",
+    "dev:server": "node ./backend/server.js",
     "dev": "concurrently \"npm:dev:*\""
   },
   "dependencies": {
