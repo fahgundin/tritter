@@ -34,7 +34,7 @@ function Profile() {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          `https://tritter.onrender.com/user/${username}`
+          `https://tritter-backend-server.onrender.com/user/${username}`
         );
         setData(response.data);
         setLoading(false)
@@ -66,7 +66,7 @@ function Profile() {
   //SEGUIR OU PARAR DE SEGUIR UM USUARIO
   function follow() {
     axios
-      .put(`https://tritter.onrender.com/api/follow/${username}`, 
+      .put(`https://tritter-backend-server.onrender.com/api/follow/${username}`, 
         {},
         {
         headers: {
