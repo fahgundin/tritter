@@ -68,6 +68,14 @@ function Navbar() {
     }
   };
 
+  const paraExplorer = () => {
+    if (!userToken) {
+      navigate('/login')
+    } else {
+      navigate('/explorer')
+    }
+  }
+
   
 
   // Função para deslogar (remover token do localStorage)
@@ -110,7 +118,7 @@ function Navbar() {
       )}
 
       <div className="py-3 px-4 pl-5" alt="Explorar">
-        <button className="text-white text-left pl-4 w-[160px] h-10 hover:bg-slate-400 active:bg-slate-300 focus:outline-none focus:ring focus:ring-slate-200 rounded-full flex items-center">
+        <button onClick={paraExplorer} className="text-white text-left pl-4 w-[160px] h-10 hover:bg-slate-400 active:bg-slate-300 focus:outline-none focus:ring focus:ring-slate-200 rounded-full flex items-center">
           <Mountain style={{ marginRight: "8px" }} /> Explorar
         </button>
       </div>

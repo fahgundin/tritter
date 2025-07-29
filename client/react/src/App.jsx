@@ -12,6 +12,7 @@ import Profile from "./pages/Profile.jsx"
 import PageNotFound from "./pages/PageNotFound.jsx";
 import Post from "./pages/Post.jsx";
 import Notifications from "./pages/Notifications.jsx";
+import Explorer from "./pages/Explorer.jsx";
 
 
 function App() {
@@ -44,13 +45,21 @@ function App() {
             </RotaPrivada>
           }
           />
+          <Route
+            path="/explorer"
+            element={
+              <RotaPrivada>
+                <Explorer />
+              </RotaPrivada>
+            }
+          />
         <Route path="/post/:id" element={<Post />} />
         <Route path="/signup" element={<Cadastro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<Navigate to="/" replace />} />
         <Route path="/user/:username" element={<Profile />} />
-        {/* <Route path="/post" element={<Navigate to="/" replace/>} />
-        <Route path="*" element={<PageNotFound />} /> */}
+        <Route path="/post" element={<Navigate to="/" replace/>} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

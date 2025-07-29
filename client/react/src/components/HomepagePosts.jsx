@@ -38,7 +38,7 @@ function HomepagePost() {
     return <div>Nenhum post encontrado.</div>;
 
   return (
-    <div className="p-2">
+    <div className="p-6">
       {data
         .slice()
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -57,11 +57,11 @@ function HomepagePost() {
           return (
             <div
               key={post.postID}
-              className="flex-1 flex items-center justify-center pb-2 cursor-pointer"
+              className="flex-1 flex items-center justify-center overflow-y-auto pb-2"
             >
               <div
                 onClick={() => navigate(`/post/${post.postID}`)}
-                className="flex flex-col items-start border-2 border-slate-400 rounded-3xl p-4 hover:bg-slate-400/20 relative w-[700px] h-fit"
+                className="flex flex-col items-start border-2 border-slate-400 rounded-2xl p-4 hover:bg-slate-400/20 relative w-[700px] h-fit cursor-pointer"
               >
                 <div className="flex items-center mb-4">
                   <img

@@ -49,7 +49,7 @@ function Post() {
       <div className="h-screen w-screen flex bg-slate-500">
         <Navbar />
         <div className="flex-1 flex items-center justify-center">
-          <div className="flex h-[500px] w-[500px] border-2 border-slate-400 rounded-3xl justify-center ">
+          <div className="flex h-[500px] w-[500px]  justify-center ">
             <h1 className="text-white flex items-center text-2xl">{error.message}</h1>
           </div>
         </div>

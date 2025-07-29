@@ -174,11 +174,11 @@ function Profile() {
               return (
                 <div
                   key={post.postID}
-                  className="flex-1 flex items-center justify-center pb-2 cursor-pointer"
+                  className="flex-1 flex items-center justify-center pb-2"
                 >
                   <div
                     onClick={() => navigate(`/post/${post.postID}`)}
-                    className="flex flex-col items-start border-2 border-slate-400 rounded-3xl p-4 hover:bg-slate-400/20 relative w-[700px] h-fit"
+                    className="flex flex-col items-start border-2 border-slate-400 rounded-3xl p-4 hover:bg-slate-400/20 relative w-[700px] h-fit cursor-pointer"
                   >
                     <div className="absolute top-4 right-4">
                       <button
