@@ -30,7 +30,7 @@ function Explorer() {
 
       try {
         const res = await axios.get(
-          `https://tritter.onrender.com/search/${encodeURIComponent(searchItem)}`
+          `https://tritter-backend-server.onrender.com/search/${encodeURIComponent(searchItem)}`
         );
 
         setData({

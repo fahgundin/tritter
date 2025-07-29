@@ -25,7 +25,7 @@ function Post() {
           setLoading(false);
         }, 10000);
 
-        const response = await axios.get(`https://tritter.onrender.com/post/${id}`);
+        const response = await axios.get(`https://tritter-backend-server.onrender.com/post/${id}`);
         clearTimeout(timeoutId);
         setData(response.data);
         setLoading(false);

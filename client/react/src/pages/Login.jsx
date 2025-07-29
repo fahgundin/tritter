@@ -19,7 +19,7 @@ export default function Login() {
 
       const onSubmit = async (data) => {
        try {
-         const response = await axios.post('https://tritter.onrender.com/login', {
+         const response = await axios.post('https://tritter-backend-server.onrender.com/login', {
            username: data.username,
            password: data.password,
          });

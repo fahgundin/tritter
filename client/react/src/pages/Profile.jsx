@@ -50,7 +50,7 @@ function Profile() {
 
   //DELETAR O POST SELECIONADO PELO USUARIO E ATUALIZAR O STATE DOS POSTS PARA ELE SUMIR
   function deletarPost(postID){
-    axios.delete(`https://tritter.onrender.com/api/delete/post/${postID}`, {
+    axios.delete(`https://tritter-backend-server.onrender.com/api/delete/post/${postID}`, {
       headers: {
         'Authorization': token
       }

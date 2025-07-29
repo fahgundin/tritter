@@ -14,7 +14,7 @@ function Notifications() {
       try {
         // 1. Buscar notificações não lidas
         const unreadResponse = await axios.get(
-          "https://tritter.onrender.com/api/withoutread/getnotifications",
+          "https://tritter-backend-server.onrender.com/api/withoutread/getnotifications",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ function Notifications() {
 
         // 2. Marcar como lidas (mesmo que não envie dados no body)
         await axios.get(
-          "https://tritter.onrender.com/api/getnotifications",
+          "https://tritter-backend-server.onrender.com/api/getnotifications",
           {
             headers: {
               Authorization: `Bearer ${token}`,

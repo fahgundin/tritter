@@ -23,7 +23,7 @@ function Postar(){
 
     async function enviarContent(data) {
       try {
-        const response = await fetch("https://tritter.onrender.com/api/post", {
+        const response = await fetch("https://tritter-backend-server.onrender.com/api/post", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
