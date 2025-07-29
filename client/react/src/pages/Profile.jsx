@@ -34,7 +34,7 @@ function Profile() {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:1000/user/${username}`
+          `https://tritter.onrender.com/user/${username}`
         );
         setData(response.data);
         setLoading(false)
@@ -50,7 +50,7 @@ function Profile() {
 
   //DELETAR O POST SELECIONADO PELO USUARIO E ATUALIZAR O STATE DOS POSTS PARA ELE SUMIR
   function deletarPost(postID){
-    axios.delete(`http://localhost:1000/api/delete/post/${postID}`, {
+    axios.delete(`https://tritter.onrender.com/api/delete/post/${postID}`, {
       headers: {
         'Authorization': token
       }
@@ -66,7 +66,7 @@ function Profile() {
   //SEGUIR OU PARAR DE SEGUIR UM USUARIO
   function follow() {
     axios
-      .put(`http://localhost:1000/api/follow/${username}`, 
+      .put(`https://tritter.onrender.com/api/follow/${username}`, 
         {},
         {
         headers: {

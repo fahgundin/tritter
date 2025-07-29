@@ -15,7 +15,7 @@ function HomepagePost() {
     const fetchHomeData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:1000/api/getfollowingposts",
+          "https://tritter.onrender.com/api/getfollowingposts",
           {
             headers: {
               Authorization: token,

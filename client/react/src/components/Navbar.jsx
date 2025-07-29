@@ -15,7 +15,7 @@ function Navbar() {
     const interval = setInterval(async () => {
       try {
         const response = await axios.get(
-          "http://localhost:1000/api/withoutread/getnotifications",
+          "https://tritter.onrender.com/api/withoutread/getnotifications",
           {
             headers: {
               Authorization: `Bearer ${token}`,

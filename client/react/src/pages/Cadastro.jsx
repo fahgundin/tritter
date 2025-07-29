@@ -17,7 +17,7 @@ export default function Cadastro() {
   async function enviarDados(data) {
     try {
       
-      const response = await fetch("http://localhost:1000/signup", {
+      const response = await fetch("https://tritter.onrender.com/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
