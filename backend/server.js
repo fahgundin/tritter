@@ -13,7 +13,7 @@ const port = process.env.PORT || 8000;
 
 const app = express();
 const corsOptions = {
-    origin: ["http://0.0.0.0:3000","http://localhost:5173"]
+    origin: ["http://0.0.0.0:3000","http://localhost:5173","https://tritter.onrender.com"]
 }
 
 app.use(cors(corsOptions));
