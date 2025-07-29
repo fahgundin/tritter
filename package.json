@@ -3,7 +3,7 @@
     
     "dev:vite": "cd client/react && npm install && npm run dev",
     "dev:server": "node ./backend/server.js",
-    "dev": "concurrently \"npm:dev:*\""
+    "dev": "concurrently \"npm:dev:vite*\"\"npm:dev:server\""
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.7.0",
