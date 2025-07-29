@@ -87,7 +87,7 @@ function Navbar() {
   
 
   return (
-    <header className="h-screen border-r-1 border-slate-400 pt-6 relative">
+    <header className="h-screen border-r-1 border-slate-400 pt-6 relative" alt="Div principal">
       <div className="py-3 px-4 pl-5" alt="Pagina inicial">
         <button
           onClick={paraHomepage}
