@@ -1,5 +1,14 @@
 {
+  "scripts": {
+        "start-server": "node ./backend/server.js", 
+        "start-client": "cd client/react && npm run dev", 
+        "dev": "concurrently \"npm run start-server\" \"npm run start-client\""
+      },
+      
   "dependencies": {
     "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
   }
 }
