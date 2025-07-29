@@ -7,7 +7,7 @@ import auth from './middlewares/auth.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
-
+const port = process.env.PORT || 1000;
 
 
 
@@ -34,9 +34,9 @@ app.get('/',(req,res) =>{
 
 });
 
-app.listen('1000', () => {
+app.listen(port, () => {
 
-  console.log(`Servidor rodando em http://localhost:1000`);
+  console.log(`Servidor rodando na porta 1000!`);
 
 });
 
