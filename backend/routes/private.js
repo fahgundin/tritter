@@ -225,14 +225,14 @@ router.put('/api/follow/:user', async(req,res)=>{
                 },
                 });
             await prisma.users.update({
-            where:{
-                userid:user.userid
-            },
-            data:{
-                followers:{
-                    set: followers.filter((userid) => userid !== decoded.username) 
+                where:{
+                    userid:user.userid
+                },
+                data:{
+                    followers:{
+                        set: followers.filter((userid) => userid !== decoded.username) 
+                    }
                 }
-            }
             })
             await prisma.users.update({
                 where:{
@@ -339,6 +339,112 @@ router.get('/api/getfollowingposts',async(req,res)=>{
 
 
 })
+
+// Like Posts
+
+router.patch('/api/likePost/:id', async(req,res) =>{
+    const token = req.headers.authorization
+    const decoded = jwt.verify(token.replace('Bearer ',''),JWT_SECRET)
+    const user = await prisma.users.findUnique(
+        {
+            where:{
+                userid:decoded.userid
+            }
+        }
+    )
+
+   
+    
+
+    if(!user.likedPosts.includes(parseInt(req.params.id))){
+        try{
+            
+            const post = await prisma.posts.findUnique(
+                {
+                     where:{
+                        postID: parseInt(req.params.id)
+                    },
+                }
+            )      
+            if (! post){
+                return res.status(401).json({message:"not found"})
+            }     
+            await prisma.posts.update(
+                {
+                    where:{
+                        postID: parseInt(req.params.id)
+                    },
+                    data:{
+                        usersLiked:{
+                            push:decoded.username
+                        }
+                    }
+                }
+            )
+            
+            await prisma.users.update(
+                {
+                    where:{
+                        userid:decoded.userid
+                    },
+                    data:{
+                        likedPosts:{
+                            push:parseInt(req.params.id)
+                        }
+                    }
+                }
+            )
+            
+            
+            
+        }catch(err){
+            console.log(err)
+        }
+    }else{
+        const { likedPosts } = await prisma.users.findUnique({
+                where: {
+                    userid: user.userid
+                },
+                select: {
+                    likedPosts: true
+                },
+                });
+        const { usersLiked } = await prisma.posts.findUnique({
+                where: {
+                    postID: parseInt(req.params.id)
+                },
+                select: {
+                    usersLiked: true
+                },
+                });
+        await prisma.users.update({
+               where:{
+                    userid:decoded.userid
+                },
+                data:{
+                    likedPosts:{
+                        set: likedPosts.filter((likedPosts) => likedPosts !== parseInt(req.params.id)) 
+                    }
+                }
+            })
+            await prisma.posts.update({
+                where:{
+                    postID:parseInt(req.params.id)
+                },
+                data:{
+                    usersLiked:{
+                        set: usersLiked.filter((usersLiked) => usersLiked !== decoded.username) 
+                    }
+                }
+            })
+
+    }
+    res.status(200).json({message:"deu tudo certo"})
+
+
+
+})
+
 
 
 
