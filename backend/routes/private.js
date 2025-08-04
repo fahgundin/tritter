@@ -394,8 +394,8 @@ router.patch('/api/likePost/:id', async(req,res) =>{
                     }
                 }
             )
-            
-            const texto_notificacao = decoded.username + ' curtiu seu post! ' + " ' "+ post.content +"' "
+            if(user.id !== post.userid){
+                const texto_notificacao = decoded.username + ' curtiu seu post! ' + " ' "+ post.content +"' "
             
             
                 const notification = await prisma.notifications.create({
@@ -404,6 +404,8 @@ router.patch('/api/likePost/:id', async(req,res) =>{
                         userid: user.userid
                     }
                 })
+            }
+            
             
         }catch(err){
             console.log(err)
