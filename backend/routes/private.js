@@ -395,7 +395,15 @@ router.patch('/api/likePost/:id', async(req,res) =>{
                 }
             )
             
+            const texto_notificacao = decoded.username + ' curtiu seu post! ' + " ' "+ post.content +"' "
             
+            
+                const notification = await prisma.notifications.create({
+                    data:{
+                        content: texto_notificacao,
+                        userid: user.userid
+                    }
+                })
             
         }catch(err){
             console.log(err)
